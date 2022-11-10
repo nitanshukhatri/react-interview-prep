@@ -1,15 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import configureStore from "./store";
+import { Provider } from "react-redux";
+import MyErrorBoundary from "./components/errorBoundary";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const store = configureStore();
+export type AppDispatch = typeof store.dispatch;
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <MyErrorBoundary>
+        <App />
+      </MyErrorBoundary>
+    </Provider>
   </React.StrictMode>
 );
 

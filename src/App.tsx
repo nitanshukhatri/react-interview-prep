@@ -8,6 +8,9 @@ import Counter from "./components/counter";
 import data from "./mock/mock-data.json";
 import ImageSlider from "./components/ImageSlider";
 import { SliderData } from "./mock/slider-data";
+import DogCard from "./components/dogCard";
+import { Container } from "@mui/material";
+import SimpleCard from "./components/exampleCard";
 const files = {
   type: "folder",
   name: "parent",
@@ -73,7 +76,15 @@ const files = {
   ],
 };
 function App() {
-  console.log(data);
+  const styles = {
+    root: {
+      textAlign: "center",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: "100vh",
+    },
+  };
   const [query, setQuery] = useState("");
   const windowSize = useWindowResize();
 
@@ -91,7 +102,7 @@ function App() {
         <TreeStruct files={files}></TreeStruct>
         <Timer onComplete={() => console.log("done")}></Timer>
         <Counter></Counter>
-        <ImageSlider slides={SliderData} />;
+        {/* <ImageSlider slides={SliderData} />; */}
         <div className="search-container">
           <div className="search-inner">
             <input placeholder="Enter Post Title" value={query} onChange={(event) => setQuery(event.target.value)} />
@@ -117,6 +128,10 @@ function App() {
                 ))}
           </div>
         </div>
+        <Container sx={styles.root}>
+          <SimpleCard />
+          <DogCard />
+        </Container>
       </div>
     </div>
   );
