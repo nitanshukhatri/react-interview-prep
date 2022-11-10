@@ -18,6 +18,11 @@ export interface IAppState {
   dogState: IDogState;
 }
 
+const customMiddleWare = (store: any) => (next: any) => (action: any) => {
+  console.log("Middleware triggered:", action);
+  next(action);
+};
+
 // Create the root reducer
 const rootReducer = combineReducers<IAppState>({
   dogState: dogReducer,

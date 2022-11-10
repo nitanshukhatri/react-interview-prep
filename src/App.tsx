@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useWindowResize } from "./hooks/useWindowResize";
@@ -11,6 +11,14 @@ import { SliderData } from "./mock/slider-data";
 import DogCard from "./components/dogCard";
 import { Container } from "@mui/material";
 import SimpleCard from "./components/exampleCard";
+import { Modal } from "./components/modal";
+import InputField from "./components/input";
+
+import { reducer, initialState } from "./ducks/reducers/countReducer";
+import IncrementCounter from "./components/IncrementCounter";
+import { CounterContextType } from "./types/counter.types";
+export const CounterContext = createContext<CounterContextType>({ state: initialState });
+
 const files = {
   type: "folder",
   name: "parent",
@@ -86,7 +94,11 @@ function App() {
     },
   };
   const [query, setQuery] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const windowSize = useWindowResize();
+  const openModal = () => {
+    setShowModal(true);
+  };
 
   if (windowSize.width < 100) {
     console.log("small screen");
@@ -96,12 +108,19 @@ function App() {
     console.log(author);
     setQuery(author);
   };
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div className="App">
       <div>
         <TreeStruct files={files}></TreeStruct>
         <Timer onComplete={() => console.log("done")}></Timer>
         <Counter></Counter>
+        <button onClick={openModal}>Open Modal</button>
+        {showModal ? <Modal setShowModal={setShowModal}> From Children</Modal> : null}
+        <InputField type="text" name="onlyText" label="Name" />
+        <CounterContext.Provider value={{ state, dispatch }}>
+          <IncrementCounter></IncrementCounter>
+        </CounterContext.Provider>
         {/* <ImageSlider slides={SliderData} />; */}
         <div className="search-container">
           <div className="search-inner">

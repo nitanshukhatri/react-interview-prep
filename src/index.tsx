@@ -10,6 +10,13 @@ import MyErrorBoundary from "./components/errorBoundary";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 const store = configureStore();
 export type AppDispatch = typeof store.dispatch;
+
+// const ReduxContext = React.createContext("redux");
+
+// const Provider = ({ store, children }: { store: any;children: any }) => (
+//   <ReduxContext.Provider value={store}>{children}</ReduxContext.Provider>
+// );
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

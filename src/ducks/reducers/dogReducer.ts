@@ -8,7 +8,7 @@ export interface IDogState {
   list: { message: {}; status: string };
 }
 
-const initialDogState: IDogState = {
+export const initialDogState: IDogState = {
   image: "",
   loading: false,
   errorMessage: "",
