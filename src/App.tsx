@@ -17,6 +17,7 @@ import InputField from "./components/input";
 import { reducer, initialState } from "./ducks/reducers/countReducer";
 import IncrementCounter from "./components/IncrementCounter";
 import { CounterContextType } from "./types/counter.types";
+import { ReducerCounter } from "./components/reducerCounter";
 export const CounterContext = createContext<CounterContextType>({ state: initialState });
 
 const files = {
@@ -112,6 +113,7 @@ function App() {
   return (
     <div className="App">
       <div>
+        <ReducerCounter />
         <TreeStruct files={files}></TreeStruct>
         <Timer onComplete={() => console.log("done")}></Timer>
         <Counter></Counter>
