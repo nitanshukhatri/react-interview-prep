@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useReducer, useRef, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useWindowResize } from "./hooks/useWindowResize";
@@ -18,8 +18,9 @@ import { reducer, initialState } from "./ducks/reducers/countReducer";
 import IncrementCounter from "./components/IncrementCounter";
 import { CounterContextType } from "./types/counter.types";
 import { ReducerCounter } from "./components/reducerCounter";
+import { useCustomReactState, useCustomState } from "./hooks/useCustomState";
+import Button from "./components/button";
 export const CounterContext = createContext<CounterContextType>({ state: initialState });
-
 const files = {
   type: "folder",
   name: "parent",
@@ -110,6 +111,10 @@ function App() {
     setQuery(author);
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    alterToggle: () => void;
+  }
+  const buttonRef = useRef<ButtonProps>(null);
   return (
     <div className="App">
       <div>
@@ -153,6 +158,8 @@ function App() {
           <SimpleCard />
           <DogCard />
         </Container>
+        <Button ref={buttonRef}></Button>
+        <button onClick={() => buttonRef?.current?.alterToggle()}>From Parent</button>
       </div>
     </div>
   );
