@@ -53,3 +53,14 @@ code {
   border-radius: 2px;
   cursor: pointer;
 }
+
+.progressRoot {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.progressSpan {
+  background-color: blue;
+  padding: 2px;
+  border-radius: 5px;
+}

@@ -20,6 +20,7 @@ import { CounterContextType } from "./types/counter.types";
 import { ReducerCounter } from "./components/reducerCounter";
 import { useCustomReactState, useCustomState } from "./hooks/useCustomState";
 import Button from "./components/button";
+import ProgressBar from "./components/progressBar";
 export const CounterContext = createContext<CounterContextType>({ state: initialState });
 const files = {
   type: "folder",
@@ -160,6 +161,7 @@ function App() {
         </Container>
         <Button ref={buttonRef}></Button>
         <button onClick={() => buttonRef?.current?.alterToggle()}>From Parent</button>
+        <ProgressBar />
       </div>
     </div>
   );
